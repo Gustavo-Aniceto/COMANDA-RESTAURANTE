@@ -52,6 +52,7 @@ def add_item(item_list):
                 6: ("Bobó de Camarão", 42.90),
                 7: ("Lasanha à Bolonhesa", 34.90),
                 8: ("Risoto de Funghi", 29.90),
+                9: ("macarronada", 24.99),
                 # Adicione mais pratos aqui
             }
         elif category == 2:
@@ -64,6 +65,7 @@ def add_item(item_list):
                 6: ("Suco de Laranja", 8.50),
                 7: ("Água Mineral", 3.50),
                 8: ("Chá Gelado", 4.90),
+                9: ("Cerveja", 14.90),
                 # Adicione mais bebidas aqui
             }
         elif category == 3:
@@ -71,23 +73,27 @@ def add_item(item_list):
                 1: ("Feijão", 9.90),
                 2: ("Farofa", 3.90),
                 3: ("Batata Frita", 10.90),
-                4: ("Purê", 7.90),
+                4: ("Pure", 7.90),
                 5: ("Salada", 6.90),
                 6: ("Vinagrete", 4.50),
                 7: ("Mandioca Frita", 8.90),
                 8: ("Couve Refogada", 6.50),
+                9: ("Torresmo", 9.90),
+
                 # Adicione mais acompanhamentos aqui
             }
+
         elif category == 4:
             items = {
-                1: ("Pudim de Leite", 12.90),
-                2: ("Mousse de Chocolate", 9.90),
-                3: ("Torta de Limão", 14.90),
-                4: ("Sorvete de Creme", 8.90),
-                5: ("Brigadeiro", 3.50),
+                1: ("Pudim", 8.50),
+                2: ("Sorvete", 6.90),
+                3: ("Torta de Limão", 12.0),
+                4: ("Brigadeiro", 4.50),
+                5: ("Mousse de Chocolate", 9.90),
                 6: ("Cheesecake de Morango", 16.90),
                 7: ("Quindim", 7.90),
                 8: ("Tiramisu", 18.90),
+                9: ("Açai", 15.90),
                 # Adicione mais sobremesas aqui
             }
         else:
@@ -132,6 +138,34 @@ def add_item(item_list):
         item_list.append(item)
 
 
+def remove_item(item_list):
+    clear_screen()
+    print("============")
+    print("REMOVER ITEM")
+    print("============\n")
+
+    if not item_list:
+        print("A comanda está vazia. Não há itens para remover.")
+        input("\nPressione Enter para continuar...")
+        return
+
+    print("COMANDA")
+    print("-------")
+    for i, item in enumerate(item_list):
+        print(f"{i+1} - {item.nome} - R$ {item.valor} - Quantidade: {item.quantidade}")
+
+    print()
+    item_index = int(input("Digite o número do item que deseja remover: "))
+
+    if item_index < 1 or item_index > len(item_list):
+        print("Índice inválido. Tente novamente.")
+        input("\nPressione Enter para continuar...")
+    else:
+        item_list.pop(item_index - 1)
+        print("Item removido com sucesso.")
+        input("\nPressione Enter para continuar...")
+
+
 def show_order(item_list):
     total = 0
 
@@ -159,6 +193,7 @@ def make_payment(item_list):
     show_order(item_list)
     print("\n1 - Efetuar pagamento")
     print("2 - Adicionar mais itens")
+    print("3 - Remover item da comanda")
 
     option = int(input("\nOpção: "))
     if option == 1:
@@ -178,6 +213,8 @@ def make_payment(item_list):
         item_list.clear()
     elif option == 2:
         add_item(item_list)
+    elif option == 3:
+        remove_item(item_list)
     else:
         print("\nOpção inválida.")
 
